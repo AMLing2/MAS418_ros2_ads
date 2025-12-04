@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+  <DUT Name="ST_in_digital" Id="{7d8bdc03-a05e-4746-a04a-739c8e5212b8}">
+    <Declaration><![CDATA[TYPE ST_in_digital :
+STRUCT
+	bCranePower : BOOL := FALSE;
+	bStartCrane : BOOL := FALSE;
+	bEnableCraneMotion : BOOL := FALSE;
+	eModeSwitch : E_CraneModes;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

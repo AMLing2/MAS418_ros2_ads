@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Task Name="simTask" Id="{c3dfa6d7-3580-44b4-a323-a2bab79448b4}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>100</CycleTime>
+    <Priority>1</Priority>
+    <PouCall>
+      <Name>P_Simulator</Name>
+    </PouCall>
+    <TaskFBGuid>{ebedc511-099e-415b-a541-d178f70a8cad}</TaskFBGuid>
+    <Fb_init>{22f66ff7-8b8c-478b-9450-32470a632761}</Fb_init>
+    <Fb_exit>{e0d683e6-937d-4287-891e-445f6096dd5b}</Fb_exit>
+    <CycleUpdate>{8f41a5cb-6a89-4ce7-90a2-299050f7e7b3}</CycleUpdate>
+    <PostCycleUpdate>{3777a726-dbb0-4cc9-8c31-568510880008}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+  <POU Name="F_stateMachine" Id="{df33374d-5b2f-4a71-89d7-746f13e49414}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_stateMachine : E_CraneStatus
+VAR_INPUT
+	stButtonInputs : ST_in_digital;
+END_VAR
+VAR
+	eState : E_CraneStatus;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF stButtonInputs.bCranePower THEN
+	eState := E_CraneStatus.On;
+	IF stButtonInputs.bEnableCraneMotion THEN
+		eState := E_CraneStatus.Ready;
+		IF stButtonInputs.bStartCrane THEN
+			eState := E_CraneStatus.Running;
+		END_IF
+	END_IF
+ELSE
+	eState := E_CraneStatus.Off;
+END_IF
+F_stateMachine := eState;]]></ST>
+    </Implementation>
+    <LineIds Name="F_stateMachine">
+      <LineId Id="1" Count="11" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

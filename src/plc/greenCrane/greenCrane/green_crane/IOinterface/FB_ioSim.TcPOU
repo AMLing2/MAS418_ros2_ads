@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ioSim" Id="{035cab98-6c47-480f-9cd9-be06721aad9e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_ioSim IMPLEMENTS I_ioInterface
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="getOutputs" Id="{0e518d93-470d-4e93-870a-5c986adabb36}">
+      <Declaration><![CDATA[METHOD getOutputs : ST_inputs_analog
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[getOutputs := P_Simulator.stSimSystemOutputs;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="setInputs" Id="{6a353b83-8eef-4c61-9978-024c652f2fc3}">
+      <Declaration><![CDATA[METHOD setInputs
+VAR_INPUT
+	stValvePos	: ST_ValvePos;
+	eCraneState	: E_CraneStatus;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[P_Simulator.stSimInputs := stValvePos;
+P_Simulator.eCraneState := eCraneState;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

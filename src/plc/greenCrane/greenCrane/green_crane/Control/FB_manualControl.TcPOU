@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_manualControl" Id="{29d0a2a7-577f-419e-82c9-b14e80532f39}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_manualControl EXTENDS AB_baseController
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="control_winch" Id="{1b80af37-3ec7-473a-b050-6cc7b0491d60}">
+      <Declaration><![CDATA[METHOD control_winch
+VAR_INPUT
+	stInputs	: ST_inputs_analog;
+END_VAR
+VAR_OUTPUT
+	fMotorValve	: REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fMotorValve := -1.0;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

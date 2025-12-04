@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="P_Simulator" Id="{842435b2-f633-4562-a126-ecf8133e2003}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Simulator
+VAR
+	fbCylinderSim : FB_CylinderSimulator;
+	fbWinchSim : FB_WinchSimulator;
+END_VAR
+VAR_INPUT
+	stSimSystemOutputs : ST_inputs_analog;
+	eCraneState : E_CraneStatus;
+	stSimInputs : ST_ValvePos;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF eCraneState <> E_CraneStatus.Off THEN // <> = !=
+	fbCylinderSim(fNormalizedValveInput := stSimInputs.rCylinderValve,
+		fPistonPosition_m => stSimSystemOutputs.fPistonPos,
+		fPistonSidePressure_bar => stSimSystemOutputs.fP_piston,
+		fRodSidePressure_bar => stSimSystemOutputs.fP_rod);
+	fbWinchSim(fNormalizedValveInput := stSimInputs.rWinchValve,
+		fWinchPosition_rad => stSimSystemOutputs.fAngPos,
+		fASidePressure_bar => stSimSystemOutputs.fP_A,
+		fBSidePressure_bar => stSimSystemOutputs.fP_B);
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+  <Itf Name="I_craneControl" Id="{82d374d0-d1d9-411c-81b8-07d4d6b1411a}">
+    <Declaration><![CDATA[INTERFACE I_craneControl
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR]]></Declaration>
+    <Method Name="control_crane" Id="{f640cdc9-e571-4642-a798-d9c3cb6a333a}">
+      <Declaration><![CDATA[METHOD control_crane
+VAR_INPUT
+	stInputs : ST_inputs_analog;
+END_VAR
+VAR_OUTPUT
+	fCylValve : REAL;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="control_winch" Id="{cc9dbcef-6880-4d7d-aa95-d3db93bdecb9}">
+      <Declaration><![CDATA[METHOD control_winch
+VAR_INPUT
+	stInputs : ST_inputs_analog;
+END_VAR
+VAR_OUTPUT
+	fMotorValve : REAL;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="controller" Id="{cf1f47c0-4ff6-4815-aabf-f2ef5b8d37c9}">
+      <Declaration><![CDATA[METHOD controller
+VAR_INPUT
+	stButtonInputs : ST_in_digital;
+	stAnalogInputs : ST_inputs_analog;
+END_VAR
+VAR_OUTPUT
+	stOutput : ST_ValvePos;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

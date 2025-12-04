@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+  <DUT Name="ST_inputs_analog" Id="{c77bb50d-a1fe-46b6-a75d-a61821748410}">
+    <Declaration><![CDATA[TYPE ST_inputs_analog :
+STRUCT	
+	fJoystick_y : LREAL;
+	fAngPos : LREAL; // [rad]
+	fP_A : LREAL; // [bar]
+	fP_B : LREAL; // [bar]
+	fJoystick_x : LREAL;
+	fPistonPos : LREAL; // [mm]
+	fP_piston : LREAL; // [bar]
+	fP_rod : LREAL; // [bar]
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>
