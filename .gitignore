@@ -41,5 +41,9 @@
 *.dwo
 
 # build files
+.cache/
+log/
+install/
+build/
 *build/*
 *install/*
