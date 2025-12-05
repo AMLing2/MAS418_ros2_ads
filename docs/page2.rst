@@ -54,6 +54,7 @@ A launch file was made for the visualization, which open RViz with the correct U
 
 Video showcase
 -------------
+In the video, the message to enable the simulator is first sent through ROS2 terminal commands, this can be seen updating the PLC variable. Crane controls are then sent.
 .. raw:: html
 
    <video width="640" height="480" controls>
