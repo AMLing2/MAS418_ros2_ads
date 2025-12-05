@@ -9,6 +9,7 @@ The project was done with a CX2033 PLC, and a computer running ROS2 jazzy in a v
 Usage
 ---------
 First source ROS2, for the publisher to build, the 'src/crane_interface' package must be build and sourced first: 
+
 .. code-block:: bash
 
     colcon build
@@ -19,11 +20,13 @@ This can then be sourced to add the interface to ROS2:
     source install/local_setup.bash
 
 To run the ROS2 nodes, first for the publisher 'src/crane_publisher':
+
 .. code-block:: bash
 
     ros2 run crane_publisher crane_publisher_cpp
 
 Visualizer and ADS listener which is in the 'src/green_crane_urdf' folder, which is done through a launch file:
+
 .. code-block:: bash
 
     ros2 launch green_crane_urdf display.launch.py
@@ -55,6 +58,7 @@ A launch file was made for the visualization, which open RViz with the correct U
 Video showcase
 -------------
 In the video, the message to enable the simulator is first sent through ROS2 terminal commands, this can be seen updating the PLC variable. Crane controls are then sent.
+
 .. raw:: html
 
    <video width="640" height="480" controls>
