@@ -9,7 +9,7 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>green_crane</Name>
-    <ProgramVersion>3.1.4026.17</ProgramVersion>
+    <ProgramVersion>3.1.4026.19</ProgramVersion>
     <Application>{5c105c3f-1cb6-4a9a-9330-8f4009c01dc2}</Application>
     <TypeSystem>{d73dd80d-4499-4e10-9250-e82d40c97d45}</TypeSystem>
     <Implicit_Task_Info>{3c3f7777-a7e4-4d09-80f0-0eed0622e1e7}</Implicit_Task_Info>
@@ -19,6 +19,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Control\AB_baseController.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\FB_AutoControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Control\FB_manualControl.TcPOU">
@@ -42,13 +45,13 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_CalcAngle.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_stateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\ST_inputs_analog.TcDUT">
@@ -64,9 +67,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Simulator\FB_CylinderSimulator.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Simulator\FB_WinchSimulator.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Simulator\P_Simulator.TcPOU">
@@ -105,8 +105,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
@@ -152,14 +152,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

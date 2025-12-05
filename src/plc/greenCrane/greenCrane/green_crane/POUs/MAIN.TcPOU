@@ -9,8 +9,11 @@ VAR
 	eCraneMode : E_CraneStatus;
 	ipControlMode : I_craneControl;
 	fbManual : FB_manualControl;
+	fbAuto : FB_AutoControl;
 	stValveOut : ST_ValvePos;
 	fbIOsim : FB_ioSim;
+	fBoomAng : LREAL;
+	fBoomAngRef : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -18,16 +21,20 @@ END_VAR
 CASE stButtonInputs.eModeSwitch OF //polymorphism using interface pointer ipControlMode
 		E_CraneModes.Manual:
 			ipControlMode := fbManual;
+		E_CraneModes.Auto:
+			ipControlMode := fbAuto;
 END_CASE
 
 IF eCraneMode = E_CraneStatus.Running AND ipControlMode <> 0  THEN
-	stAnalogInputs := fbIOsim.getOutputs();
+	fbIOsim.getOutputs(stSimOut := stAnalogInputs);
 	ipControlMode.controller(stButtonInputs := stButtonInputs,
 		stAnalogInputs := stAnalogInputs,
 		stOutput => stValveOut);
 	fbIOsim.setInputs(stValvePos := stValveOut,
 		eCraneState := eCraneMode);
 END_IF
+
+fBoomAng := F_CalcAngle(stAnalogInputs.fPistonPos);
 ]]></ST>
     </Implementation>
   </POU>

@@ -4,7 +4,6 @@
     <Declaration><![CDATA[PROGRAM P_Simulator
 VAR
 	fbCylinderSim : FB_CylinderSimulator;
-	fbWinchSim : FB_WinchSimulator;
 END_VAR
 VAR_INPUT
 	stSimSystemOutputs : ST_inputs_analog;
@@ -14,14 +13,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF eCraneState <> E_CraneStatus.Off THEN // <> = !=
-	fbCylinderSim(fNormalizedValveInput := stSimInputs.rCylinderValve,
+	fbCylinderSim(ssMethodType := 1,
+		fNormalizedValveInput := stSimInputs.rCylinderValve,
 		fPistonPosition_m => stSimSystemOutputs.fPistonPos,
 		fPistonSidePressure_bar => stSimSystemOutputs.fP_piston,
 		fRodSidePressure_bar => stSimSystemOutputs.fP_rod);
-	fbWinchSim(fNormalizedValveInput := stSimInputs.rWinchValve,
-		fWinchPosition_rad => stSimSystemOutputs.fAngPos,
-		fASidePressure_bar => stSimSystemOutputs.fP_A,
-		fBSidePressure_bar => stSimSystemOutputs.fP_B);
+ELSE
+	fbCylinderSim(ssMethodType := 0);
 END_IF]]></ST>
     </Implementation>
   </POU>

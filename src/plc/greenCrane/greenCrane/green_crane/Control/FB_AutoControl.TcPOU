@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_manualControl" Id="{29d0a2a7-577f-419e-82c9-b14e80532f39}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_manualControl EXTENDS AB_baseController
+  <POU Name="FB_AutoControl" Id="{87637cc0-4cc2-41ff-b4b8-bf7a9ca647be}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AutoControl EXTENDS AB_baseController
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -12,7 +12,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="control_crane" Id="{da4f30af-5cec-4d28-83d0-bb2c4d40285d}">
+    <Method Name="control_crane" Id="{080a653f-f4a5-4ea1-9c1e-8ee04d7c2e61}">
       <Declaration><![CDATA[METHOD control_crane
 VAR_INPUT
 	stInputs	: ST_inputs_analog;
@@ -22,7 +22,7 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fCylValve := stInputs.fJoystick;]]></ST>
+        <ST><![CDATA[fCylValve := 0;]]></ST>
       </Implementation>
     </Method>
   </POU>

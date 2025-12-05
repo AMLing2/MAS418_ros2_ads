@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+<TcPlcObject Version="1.1.0.1">
   <Itf Name="I_ioInterface" Id="{505e22f3-9238-449c-bbd1-997bbf60e9b5}">
     <Declaration><![CDATA[INTERFACE I_ioInterface
 ]]></Declaration>
     <Method Name="getOutputs" Id="{769e2e60-e724-4929-93fb-c1aacf6fa0f0}">
-      <Declaration><![CDATA[METHOD getOutputs : ST_inputs_analog
-VAR_INPUT
+      <Declaration><![CDATA[METHOD getOutputs
+VAR_IN_OUT
+	stSimOut : ST_inputs_analog;
 END_VAR
 ]]></Declaration>
     </Method>

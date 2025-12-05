@@ -13,10 +13,15 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="getOutputs" Id="{0e518d93-470d-4e93-870a-5c986adabb36}">
-      <Declaration><![CDATA[METHOD getOutputs : ST_inputs_analog
+      <Declaration><![CDATA[METHOD getOutputs
+VAR_IN_OUT
+	stSimOut : ST_inputs_analog;
+END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[getOutputs := P_Simulator.stSimSystemOutputs;]]></ST>
+        <ST><![CDATA[stSimOut.fP_piston := P_Simulator.stSimSystemOutputs.fP_piston;
+stSimOut.fP_rod := P_Simulator.stSimSystemOutputs.fP_rod;
+stSimOut.fPistonPos := P_Simulator.stSimSystemOutputs.fPistonPos;]]></ST>
       </Implementation>
     </Method>
     <Method Name="setInputs" Id="{6a353b83-8eef-4c61-9978-024c652f2fc3}">

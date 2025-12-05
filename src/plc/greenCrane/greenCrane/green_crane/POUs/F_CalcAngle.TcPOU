@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_CalcAngle" Id="{b1865e4a-c30f-4826-87d2-10fed11ef5bd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_CalcAngle : LREAL // [rad] output
+VAR_INPUT
+	xCyl : LREAL; // [m] cylinder position
+END_VAR
+VAR
+	ABx : LREAL := 0.427;
+	ABy : LREAL := 1.057;
+	ACx : LREAL := 0.49484;
+	ACy : LREAL := 0.133;
+	
+	AB : LREAL;
+	AC : LREAL;
+	BC : LREAL;
+	alpha1 : LREAL;
+	alpha2 : LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[AB := SQRT(EXPT(ABS(ABx),2) + EXPT(ABS(ABy),2));
+AC := SQRT(EXPT(ABS(ACx),2) + EXPT(ABS(ACy),2));
+
+BC := 0.77222 + xCyl;
+
+alpha1 := ATAN(ABS(ACy)/ABS(ACx));
+alpha2 := ATAN(ABS(ABy)/ABS(ABx));
+
+F_CalcAngle := ACOS( (EXPT(ABS(AB),2) + EXPT(ABS(AC),2) - (EXPT(ABS(BC),2))) / (2 * ABS(AB)*ABS(AC)) ) - alpha1 + alpha2;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

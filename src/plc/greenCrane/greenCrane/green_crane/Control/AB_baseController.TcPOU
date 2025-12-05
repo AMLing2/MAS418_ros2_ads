@@ -13,25 +13,12 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="control_crane" Id="{71d61f37-1095-4cc3-bdfa-ab184bb54947}">
-      <Declaration><![CDATA[METHOD control_crane
+      <Declaration><![CDATA[METHOD ABSTRACT control_crane 
 VAR_INPUT
 	stInputs	: ST_inputs_analog;
 END_VAR
 VAR_OUTPUT
 	fCylValve	: REAL;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[fCylValve := 1.0;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="control_winch" Id="{da8a7323-d43d-4c8a-ac06-27e1b2b62829}">
-      <Declaration><![CDATA[METHOD control_winch
-VAR_INPUT
-	stInputs	: ST_inputs_analog;
-END_VAR
-VAR_OUTPUT
-	fMotorValve	: REAL;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -49,8 +36,7 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[stOutput.rCylinderValve := control_crane(stInputs := stAnalogInputs);
-stOutput.rWinchValve := control_winch(stInputs := stAnalogInputs);]]></ST>
+        <ST><![CDATA[stOutput.rCylinderValve := control_crane(stInputs := stAnalogInputs);]]></ST>
       </Implementation>
     </Method>
   </POU>
