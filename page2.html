@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ros2 with ADS - Green crane &#8212; mas418_ros2_ads  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="mas418_ros2_ads" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ros2-with-ads-green-crane">
+<h1>Ros2 with ADS - Green crane<a class="headerlink" href="#ros2-with-ads-green-crane" title="Link to this heading">¶</a></h1>
+<p>The project involves simulating a crane operation controlled by a Programmable Logic Controller (PLC). The PLC communicates with Robot Operating System 2 (ROS2) using the Automation Device Specification (ADS). A visualization of the crane was done using RViz, and with a publishing node which listens to a ROS2 message interface.</p>
+<p>The project was done with a CX2033 PLC, and a computer running ROS2 jazzy in a virtual machine with Ubuntu 24.04 LTS.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p>First source ROS2, for the publisher to build, the ‘src/crane_interface’ package must be build and sourced first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+<p>This can then be sourced to add the interface to ROS2:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>install/local_setup.bash
+</pre></div>
+</div>
+<p>To run the ROS2 nodes, first for the publisher ‘src/crane_publisher’:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>crane_publisher<span class="w"> </span>crane_publisher_cpp
+</pre></div>
+</div>
+<p>Visualizer and ADS listener which is in the ‘src/green_crane_urdf’ folder, which is done through a launch file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>green_crane_urdf<span class="w"> </span>display.launch.py
+</pre></div>
+</div>
+</section>
+<section id="plc-setup">
+<h2>PLC Setup<a class="headerlink" href="#plc-setup" title="Link to this heading">¶</a></h2>
+<p>The plc was set up including a simulation generated from a Simulink file, altough not fully implemented, manual and automatic modes were created which implemented a function block interface, using function block pointers to switch between them. No Global Variable Lists (GVL) were used, instead variables were placed in the main program and in function blocks.</p>
+<p>In the PLC, the network ID of the ubuntu virtual machine was specified, which was set to ‘192.16.0.16’. For this to work, a second network interface had to be created in VirtualBox, and in the virtual machine the ethernet interface had to be set to the same specified IP. The firewalls did not have to be re-configured for this to work.</p>
+</section>
+<section id="communication-with-ros2-using-ads">
+<h2>Communication with ROS2 Using ADS<a class="headerlink" href="#communication-with-ros2-using-ads" title="Link to this heading">¶</a></h2>
+<p>ADS is used for efficient communication between the PLC and external systems, such as ROS2. It facilitates secure data exchange and command transmission.</p>
+<ul class="simple">
+<li><p><strong>Setting Up ADS in ROS2</strong>:</p></li>
+</ul>
+<p>Initially, the Beckhoff ADS library was incorporated into the project as a Git submodule, positioned within the <cite>ADS</cite> directory. Within the <cite>CMakeLists.txt</cite> file for the nodes, the path to the ADS library was specified. This configuration ensured that ADS functionalities were appropriately compiled and linked with the project’s core components. The ADS I/O was configured to run within ROS2 nodes, either reading data from the ‘MAIN’ function block in the PLC program, or writing to them.</p>
+<p>To establish ADS communication within the ROS2 framework, an ADS client was instantiated within the main program, which were then passed with a reference to the ROS2 nodes. This client was configured the network ID corresponding to the PLC. For the publisher, a new message interface was created which included the relevant variables to set. This was done so other components in ROS2 can communicate with the PLC without needing to use ADS directly. The visualization was set up with RViz, which used ‘Joint State Publisher’ to send data to RViz.</p>
+<p>It was however found out that two ADS clients could not be run at the same time, there fore the publisher/subscriber had to be stopped and restarted when using them separately. Optimally the I/O of the ADS should be put into a single node which only recieves and sends the data from/to the ADS network, therefore placing the visualization in another node.</p>
+<p>A launch file was made for the visualization, which open RViz with the correct URDF file, as well as starting the ADS reciever and joint state publisher node.</p>
+</section>
+<section id="video-showcase">
+<h2>Video showcase<a class="headerlink" href="#video-showcase" title="Link to this heading">¶</a></h2>
+<p>In the video, the message to enable the simulator is first sent through ROS2 terminal commands, this can be seen updating the PLC variable. Crane controls are then sent.</p>
+<video width="640" height="480" controls>
+  <source src="_static/ros2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video></section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">mas418_ros2_ads</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ros2 with ADS - Green crane</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plc-setup">PLC Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#communication-with-ros2-using-ads">Communication with ROS2 Using ADS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#video-showcase">Video showcase</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">mas418_ros2_ads</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Adrian Ling.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/page2.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
