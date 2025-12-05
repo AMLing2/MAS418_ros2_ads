@@ -15,6 +15,7 @@ First source ROS2, for the publisher to build, the 'src/crane_interface' package
     colcon build
 
 This can then be sourced to add the interface to ROS2:
+
 .. code-block:: bash
 
     source install/local_setup.bash
@@ -58,6 +59,7 @@ A launch file was made for the visualization, which open RViz with the correct U
 Video showcase
 -------------
 In the video, the message to enable the simulator is first sent through ROS2 terminal commands, this can be seen updating the PLC variable. Crane controls are then sent.
+
 
 .. raw:: html
 
