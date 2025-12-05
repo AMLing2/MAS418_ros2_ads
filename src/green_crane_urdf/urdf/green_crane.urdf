@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot name="green_crane">
+  <material name="green">
+    <color rgba="0 0.8 0 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+				<mesh filename="package://green_crane_urdf/meshes/frame_URDF-1.STL"/>
+      </geometry>
+			<origin rpy="0.0 0 0" xyz="0 0 0.57207"/>
+      <material name="green"/>
+    </visual>
+  </link>
+
+  <link name="crane_boom">
+    <visual>
+			<geometry>
+				<mesh filename="package://green_crane_urdf/meshes/boom_URDF.STL"/>
+      </geometry>
+			<origin rpy="0 0 0" xyz="3.10836 0 0.06343"/>
+      <material name="green"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_crane_boom" type="revolute">
+		<axis xyz="0 1 0"/>
+		<limit effort="1000.0" lower="0.3267" upper="-0.6948" velocity="0.5"/>
+    <parent link="base_link"/>
+    <child link="crane_boom"/>
+		<origin rpy="0 0 0" xyz="-0.56876 0 1.752"/>
+  </joint>
+
+  <link name="tooltip">
+    <visual>
+			<origin xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <joint name="boom_tooltip" type="fixed">
+    <parent link="crane_boom"/>
+    <child link="tooltip"/>
+    <origin xyz="3.68 0 0"/>
+  </joint>
+
+
+</robot>
