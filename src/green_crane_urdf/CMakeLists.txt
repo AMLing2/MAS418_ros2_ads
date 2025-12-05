@@ -16,13 +16,27 @@ find_package(tf2_geometry_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 #find_package(crane_interface REQUIRED)
 
+# find ADS library
+find_library(
+    LIBADS_LIBRARY
+    NAMES AdsLib
+    HINTS "../../ADS/build/"
+)
+
+# generate compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_executable(urdf_tutorial_cpp src/urdf_tutorial.cpp)
+target_include_directories(urdf_tutorial_cpp PRIVATE "../../ADS/AdsLib")
+target_link_libraries(urdf_tutorial_cpp PUBLIC ${LIBADS_LIBRARY})
 
 ament_target_dependencies(urdf_tutorial_cpp
+	PUBLIC
   sensor_msgs
   rclcpp
 	#crane_interface
 )
+
 
 install(TARGETS
   urdf_tutorial_cpp

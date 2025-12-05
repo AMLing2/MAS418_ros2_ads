@@ -47,3 +47,4 @@ install/
 build/
 *build/*
 *install/*
+compile_commands.json
